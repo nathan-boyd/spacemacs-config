@@ -1,0 +1,67 @@
+(setq linum-format "%d")
+(setq evil-emacs-state-cursor '(bar . 2))
+(setq-default omnisharp--curl-executable-path "/usr/bin/curl")
+(setq-default omnisharp-server-executable-path "/usr/local/bin/omnisharp")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; define duplicate-line function ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun my/duplicate-line()
+  "Duplicate current line."
+  (interactive)
+  (move-beginning-of-line 1)
+  (kill-line)
+  (yank)
+  (open-line 1)
+  (forward-line 1)
+  (yank))
+
+;; bind key and override all minor modes with *
+(bind-keys*
+ ("M-m d" . my/duplicate-line))
+
+;;;;;;;;;;;;;;;;;;;;;
+;; omnisharp setup ;;
+;;;;;;;;;;;;;;;;;;;;;
+(defun find-vs-solution-upwards (dirname)
+  "Recursively find first VS solution file from this directory upwards."
+  (unless (or (string-empty-p dirname) (string-equal dirname "/"))
+    (let ((slns (directory-files dirname 't "\\.sln$")))
+      (if slns
+          (car slns)
+        (find-vs-solution-upwards (expand-file-name (concat (file-name-as-directory dirname) "..")))))))
+
+(defun omnisharp-server-running? ()
+  "Non-nil if there is a buffer called \"OmniServer\"."
+  (get-buffer "OmniServer"))
+
+(defun maybe-start-omnisharp ()
+  "Does what it says."
+  (interactive)
+  (unless (omnisharp-server-running?)
+    (omnisharp-start-omnisharp-server (find-vs-solution-upwards (file-name-directory (buffer-file-name))))))
+
+(add-hook 'csharp-mode-hook 'omnisharp-mode)
+(add-hook 'csharp-mode-hook 'maybe-start-omnisharp)
+
+;;;;;;;;;;;;;;;;;;;;;
+;; powerline setup ;;
+;;;;;;;;;;;;;;;;;;;;;
+(use-package powerline
+  :config
+  (setq-default powerline-display-hud nil)
+;;  (setq powerline-default-separator 'utf-8)
+  (setq ns-use-srgb-colorspace nil)
+  (setq powerline-default-separator 'arrow)
+  (powerline-default-theme))
+
+;;;;;;;;;;;;;;;;;;;;;;
+;; setup whitespace ;;
+;;;;;;;;;;;;;;;;;;;;;;
+(require 'whitespace)
+(global-whitespace-mode 1)
+(setq whitespace-display-mappings '(
+  (space-mark 32 [183] [46])   ; 32 SPACE 「 」
+  (newline-mark 10 [182 10])   ; 10 LINE FEED
+  (tab-mark 9 [187 9] [92 9])  ; 9  TAB
+))
