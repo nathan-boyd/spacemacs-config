@@ -14,6 +14,11 @@ values."
    inhibit-splash-screen t
    inhibit-startup-message t
 
+   flycheck-ruby-rubocop-executable "~/.rvm/gems/ruby-2.2.2/bin/rubocop"
+
+   ;; dont prompt to follow symlinks
+   vc-follow-symlinks t
+
    ;; don't show buffer position as percentage
    spaceline-buffer-position-p nil
 
@@ -44,14 +49,21 @@ values."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(sql
+   '(auto-completion
+     better-defaults
      csharp
-     helm
-     auto-completion
+     docker
      emacs-lisp
      git
+     helm
+     html
+     javascript
+     markdown
      spell-checking
-     syntax-checking)
+     syntax-checking
+     sql
+     (ruby :variables ruby-enable-enh-ruby-mode t)
+     yaml)
 
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -386,9 +398,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (origami smeargle orgit omnisharp shut-up magit-gitflow magit magit-popup helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-commit with-editor flyspell-correct pos-tip flycheck csharp-mode company yasnippet auto-complete sql-indent spaceline ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org restart-emacs request rainbow-delimiters powerline popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word company-statistics column-enforce-mode clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
-
- '(whitespace-line-column 500000))
+    (mmm-mode markdown-toc markdown-mode gh-md enh-ruby-mode web-completion-data dash-functional company tern feature-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby vi-tilde-fringe evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu zenburn-theme yaml-mode ws-butler winum which-key web-mode web-beautify volatile-highlights uuidgen use-package unfill toc-org tagedit sql-indent spaceline smeargle smartparens slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters pug-mode popwin persp-mode pcre2el paradox origami orgit org-bullets open-junk-file omnisharp neotree mwim move-text magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint less-css-mode js2-refactor js-doc info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil eval-sexp-fu emmet-mode elisp-slime-nav dumb-jump dockerfile-mode docker define-word company-web company-tern company-statistics column-enforce-mode coffee-mode clean-aindent-mode bind-map auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

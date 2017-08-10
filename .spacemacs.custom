@@ -2,6 +2,23 @@
 (setq evil-emacs-state-cursor '(bar . 2))
 (setq-default omnisharp--curl-executable-path "/usr/bin/curl")
 (setq-default omnisharp-server-executable-path "/usr/local/bin/omnisharp")
+(setq-default flycheck-ruby-rubocop-executable "/Users/nboyd/.rvm/gems/ruby-2.2.2/bin/rubocop")
+
+;; turn off warning for active process exist on exit
+(add-hook 'comint-exec-hook
+          (lambda () (set-process-query-on-exit-flag (get-buffer-process (current-buffer)) nil)))
+
+
+;; (set-face-attribute 'whitespace-line nil)
+;; (set-face-attribute 'whitespace-tab nil              :foreground "dim gray":background "#3F3F3F")
+;; (set-face-attribute 'whitespace-space nil            :foreground "dim gray":background "#3F3F3F")
+;; (set-face-attribute 'whitespace-newline nil          :foreground "dim gray":background "#3F3F3F")
+;; (set-face-attribute 'whitespace-indentation nil      :foreground "dim gray":background "#3F3F3F")
+;; (set-face-attribute 'trailing-whitespace nil         :foreground "dim gray":background "#4F4F4F")
+;; (set-face-attribute 'whitespace-empty nil            :foreground "dim gray":background "#4F4F4F")
+;; (set-face-attribute 'whitespace-space-after-tab nil  :foreground "dim gray":background "#4F4F4F")
+;; (set-face-attribute 'whitespace-space-before-tab nil :foreground "dim gray":background "#4F4F4F")
+;; (set-face-attribute 'whitespace-trailing nil         :foreground "dim gray":background "#4F4F4F")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; define duplicate-line function ;;
@@ -19,6 +36,28 @@
 ;; bind key and override all minor modes with *
 (bind-keys*
  ("M-m d" . my/duplicate-line))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; setup exec from shell ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package exec-path-from-shell
+  :ensure t
+  :init
+    (defvar exec-path-from-shell-check-startup-files)
+    (setq exec-path-from-shell-check-startup-files nil)
+  :config
+    (exec-path-from-shell-initialize))
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; setup feature-mode ;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package feature-mode
+  :ensure t
+  :diminish feature-mode
+  :config
+  (setq feature-step-search-path "features/**/*steps.rb")
+  (setq feature-step-search-gems-path "gems/ruby/*/gems/*/**/*steps.rb")
+  (add-to-list 'auto-mode-alist '("\.feature$" . feature-mode)))
 
 ;;;;;;;;;;;;;;;;;;;;;
 ;; omnisharp setup ;;
@@ -55,11 +94,50 @@
   (setq powerline-default-separator 'arrow)
   (powerline-default-theme))
 
+;;;;;;;;;;;;;;;
+;; setup rvm ;;
+;;;;;;;;;;;;;;;
+(use-package rvm
+  :config
+    (rvm-use-default))
+
+;;;;;;;;;;;;;;;;
+;; setup robe ;;
+;;;;;;;;;;;;;;;;
+;; (add-hook 'ruby-mode-hook 'robe-mode)
+
+;; ruby-mode has keybinding [C-c C-s] for `inf-ruby'.
+;; auto start robe `robe-start' after start `inf-ruby'.
+;; (defun my-robe-start ()
+;;   (interactive)
+;;   (unless robe-running
+;;     (robe-start)))
+
+;; (defadvice inf-ruby-console-auto (after inf-ruby-console-auto activate)
+;;   "Run `robe-start' after `inf-ruby-console-auto' started."
+;;   (my-robe-start))
+
+;; (with-eval-after-load 'projectile-rails
+;;   (define-key projectile-rails-mode-map
+;;     [remap inf-ruby] 'inf-ruby-console-auto))
+
+;; (defadvice inf-ruby (after inf-ruby activate)
+;;   "Run `robe-start' after `inf-ruby' started."
+;;   (my-robe-start))
+
+;; (define-key enh-ruby-mode-map (kbd "C-c C-s") 'inf-ruby)
+
+;; ;; auto start robe process for completing
+;; (defun my-robe-auto-start ()
+;;   (unless robe-running
+;;     (call-interactively 'inf-ruby)))
+;; (add-hook 'enh-ruby-mode-hook #'my-robe-auto-start)
+
 ;;;;;;;;;;;;;;;;;;;;;;
 ;; setup whitespace ;;
 ;;;;;;;;;;;;;;;;;;;;;;
 (require 'whitespace)
-(global-whitespace-mode 1)
+;; (global-whitespace-mode 1)
 (setq whitespace-display-mappings '(
   (space-mark 32 [183] [46])   ; 32 SPACE 「 」
   (newline-mark 10 [182 10])   ; 10 LINE FEED
