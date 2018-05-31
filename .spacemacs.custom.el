@@ -7,4 +7,3 @@
 (setq powerline-default-separator 'arrow)
 (setq powerline-default-separator 'utf-8)
 (setq ns-use-srgb-colorspace nil)
-
