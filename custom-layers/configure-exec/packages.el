@@ -1,4 +1,4 @@
-;;; packages.el --- configure-ui layer packages file for Spacemacs.
+;;; packages.el --- configure-exec layer packages file for Spacemacs.
 ;;
 ;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
 ;;
@@ -18,24 +18,22 @@
 ;;
 ;;
 ;; Briefly, each package to be installed or configured by this layer should be
-;; added to `configure-ui-packages'. Then, for each package PACKAGE:
+;; added to `configure-exec-packages'. Then, for each package PACKAGE:
 ;;
 ;; - If PACKAGE is not referenced by any other Spacemacs layer, define a
-;;   function `configure-ui/init-PACKAGE' to load and initialize the package.
+;;   function `configure-exec/init-PACKAGE' to load and initialize the package.
 
 ;; - Otherwise, PACKAGE is already referenced by another Spacemacs layer, so
-;;   define the functions `configure-ui/pre-init-PACKAGE' and/or
-;;   `configure-ui/post-init-PACKAGE' to customize the package as it is loaded.
+;;   define the functions `configure-exec/pre-init-PACKAGE' and/or
+;;   `configure-exec/post-init-PACKAGE' to customize the package as it is loaded.
 
 ;;; Code:
 
-(defconst configure-ui-packages
-  '(spaceline)
+(defconst configure-exec-packages
+  '())
 
-(defun configure-ui/pre-init-spaceline ()
-  (use-package spaceline
-    :config (progn
-      (setq ns-use-srgb-colorspace nil)
-      (setq powerline-default-separator 'utf-8))))
+;; dont ask for confirmation when exiting while processes are running
+(add-hook 'comint-exec-hook
+           (lambda () (set-process-query-on-exit-flag (get-buffer-process (current-buffer)) nil)))
 
 ;;; packages.el ends here
