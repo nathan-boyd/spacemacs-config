@@ -31,38 +31,38 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     nginx
-     csv
-     python
-     vimscript
+     ;; custom
+     configure-ui
+     ;; languages
      csharp
-     spell-checking
-     windows-scripts
-     sql
-     javascript
-     ruby
-     osx
-     yaml
-     markdown
+     csv
      emacs-lisp
-     ivy
+     javascript
+     markdown
+     nginx
+     osx
+     python
+     ruby
+     sql
+     vimscript
+     windows-scripts
+     yaml
+     ;; functional
      auto-completion
      better-defaults
-     emacs-lisp
      git
-     markdown
+     ivy
      spell-checking
      syntax-checking
      (version-control :variables
                       version-control-diff-tool 'diff-hl
                       version-control-diff-side 'left
-                      version-control-global-margin 't)
-     configure-ui)
+                      version-control-global-margin 't))
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(use-package)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -118,7 +118,7 @@ values."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
-   dotspacemacs-startup-banner 'official
+   dotspacemacs-startup-banner nil
    ;; List of items to show in startup buffer or an association list of
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
    ;; Possible values for list-type are:
@@ -337,10 +337,10 @@ you should place your code here."
    ["#0a0814" "#f2241f" "#67b11d" "#b1951d" "#4f97d7" "#a31db1" "#28def0" "#b2b2b2"])
  '(package-selected-packages
    (quote
-    (skewer-mode shut-up markdown-mode magit simple-httpd json-snatcher json-reformat multiple-cursors js2-mode fringe-helper git-gutter+ git-gutter flyspell-correct pos-tip flycheck magit-popup git-commit ghub with-editor csharp-mode dash-functional tern company inf-ruby yasnippet anaconda-mode pythonic all-the-icons memoize auto-complete define-word yapfify yaml-mode ws-butler winum which-key wgrep web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package unfill toc-org sql-indent spaceline-all-the-icons smex smeargle rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder restart-emacs request rbenv rake rainbow-delimiters pyvenv pytest pyenv-mode py-isort powershell popwin pip-requirements persp-mode pbcopy paradox osx-trash osx-dictionary orgit org-bullets open-junk-file omnisharp nginx-mode neotree mwim move-text mmm-mode minitest markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint launchctl json-mode js2-refactor js-doc ivy-hydra indent-guide hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-make google-translate golden-ratio gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-ivy flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish diff-hl dactyl-mode cython-mode csv-mode counsel-projectile company-tern company-statistics company-anaconda column-enforce-mode coffee-mode clean-aindent-mode chruby bundler auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile atom-one-dark-theme aggressive-indent adaptive-wrap ace-window ace-link ac-ispell))))
+    (packed csharp csv skewer-mode shut-up markdown-mode magit simple-httpd json-snatcher json-reformat multiple-cursors js2-mode fringe-helper git-gutter+ git-gutter flyspell-correct pos-tip flycheck magit-popup git-commit ghub with-editor csharp-mode dash-functional tern company inf-ruby yasnippet anaconda-mode pythonic all-the-icons memoize auto-complete define-word yapfify yaml-mode ws-butler winum which-key wgrep web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package unfill toc-org sql-indent spaceline-all-the-icons smex smeargle rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder restart-emacs request rbenv rake rainbow-delimiters pyvenv pytest pyenv-mode py-isort powershell popwin pip-requirements persp-mode pbcopy paradox osx-trash osx-dictionary orgit org-bullets open-junk-file omnisharp nginx-mode neotree mwim move-text mmm-mode minitest markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint launchctl json-mode js2-refactor js-doc ivy-hydra indent-guide hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-make google-translate golden-ratio gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-ivy flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish diff-hl dactyl-mode cython-mode csv-mode counsel-projectile company-tern company-statistics company-anaconda column-enforce-mode coffee-mode clean-aindent-mode chruby bundler auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile atom-one-dark-theme aggressive-indent adaptive-wrap ace-window ace-link ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:foreground "#ABB2BF" :background "#282C34")))))
