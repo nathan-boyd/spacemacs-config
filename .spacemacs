@@ -46,6 +46,7 @@ values."
      python
      ruby
      sql
+     typescript
      vimscript
      windows-scripts
      yaml
@@ -329,9 +330,14 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (setq vc-follow-symlinks t)
   (setq multi-term-program "/usr/bin/zsh")
+
+  ;; fix shell exec
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize))
-  (add-to-list 'default-frame-alist '(fullscreen . fullboth)) 
+  (add-to-list 'default-frame-alist '(fullscreen . fullboth))
+
+  ;; fix helm split screen
+  (setq helm-split-window-inside-p t)
   (server-start))
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -346,7 +352,7 @@ you should place your code here."
  '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
    (quote
-    (web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag flyspell-correct-helm ace-jump-helm-line packed csharp csv skewer-mode shut-up markdown-mode magit simple-httpd json-snatcher json-reformat multiple-cursors js2-mode fringe-helper git-gutter+ git-gutter flyspell-correct pos-tip flycheck magit-popup git-commit ghub with-editor csharp-mode dash-functional tern company inf-ruby yasnippet anaconda-mode pythonic all-the-icons memoize auto-complete define-word yapfify yaml-mode ws-butler winum which-key wgrep web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package unfill toc-org sql-indent spaceline-all-the-icons smex smeargle rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder restart-emacs request rbenv rake rainbow-delimiters pyvenv pytest pyenv-mode py-isort powershell popwin pip-requirements persp-mode pbcopy paradox osx-trash osx-dictionary orgit org-bullets open-junk-file omnisharp nginx-mode neotree mwim move-text mmm-mode minitest markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint launchctl json-mode js2-refactor js-doc ivy-hydra indent-guide hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-make google-translate golden-ratio gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-ivy flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish diff-hl dactyl-mode cython-mode csv-mode counsel-projectile company-tern company-statistics company-anaconda column-enforce-mode coffee-mode clean-aindent-mode chruby bundler auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile atom-one-dark-theme aggressive-indent adaptive-wrap ace-window ace-link ac-ispell))))
+    (tide typescript-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag flyspell-correct-helm ace-jump-helm-line packed csharp csv skewer-mode shut-up markdown-mode magit simple-httpd json-snatcher json-reformat multiple-cursors js2-mode fringe-helper git-gutter+ git-gutter flyspell-correct pos-tip flycheck magit-popup git-commit ghub with-editor csharp-mode dash-functional tern company inf-ruby yasnippet anaconda-mode pythonic all-the-icons memoize auto-complete define-word yapfify yaml-mode ws-butler winum which-key wgrep web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package unfill toc-org sql-indent spaceline-all-the-icons smex smeargle rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder restart-emacs request rbenv rake rainbow-delimiters pyvenv pytest pyenv-mode py-isort powershell popwin pip-requirements persp-mode pbcopy paradox osx-trash osx-dictionary orgit org-bullets open-junk-file omnisharp nginx-mode neotree mwim move-text mmm-mode minitest markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint launchctl json-mode js2-refactor js-doc ivy-hydra indent-guide hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-make google-translate golden-ratio gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-ivy flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish diff-hl dactyl-mode cython-mode csv-mode counsel-projectile company-tern company-statistics company-anaconda column-enforce-mode coffee-mode clean-aindent-mode chruby bundler auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile atom-one-dark-theme aggressive-indent adaptive-wrap ace-window ace-link ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
